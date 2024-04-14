@@ -1,0 +1,18 @@
+- hosts: webservers
+  become: true
+
+  tasks:
+    - name: Install Node.js
+      apt:
+        name: nodejs
+        state: present
+
+    - name: Install npm
+      apt:
+        name: npm
+        state: present
+
+    - name: Update npm packages
+      command: npm update -g
+      args:
+        chdir: "{{ ansible_env.HOME }}"

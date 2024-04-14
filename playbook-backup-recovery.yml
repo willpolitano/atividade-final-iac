@@ -1,0 +1,28 @@
+- hosts: webservers
+  become: true
+
+  tasks:
+    - name: Install rsync (if not already installed)
+      apt:
+        name: rsync
+        state: present
+
+    - name: Create backup directory
+      file:
+        path: /backup
+        state: directory
+
+    - name: Configure backup script
+      copy:
+        content: |
+          #!/bin/bash
+          rsync -av /path/to/backup/source /backup/destination
+        dest: /usr/local/bin/backup_script.sh
+        mode: "0755"
+
+    - name: Add cron job for backup
+      cron:
+        name: "Backup job"
+        minute: "0"
+        hour: "1"
+        job: "/usr/local/bin/backup_script.sh"

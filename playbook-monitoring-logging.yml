@@ -1,0 +1,32 @@
+- hosts: webservers
+  become: true
+
+  tasks:
+    - name: Install Prometheus
+      apt:
+        name: prometheus
+        state: present
+
+    - name: Configure Prometheus
+      lineinfile:
+        path: /etc/prometheus/prometheus.yml
+        line: |
+          global:
+            scrape_interval: 15s
+          scrape_configs:
+            - job_name: 'node'
+              static_configs:
+                - targets: ['localhost:9100']
+      notify: restart prometheus
+
+    - name: Enable and start Prometheus service
+      service:
+        name: prometheus
+        enabled: yes
+        state: started
+
+  handlers:
+    - name: restart prometheus
+      service:
+        name: prometheus
+        state: restarted

@@ -1,0 +1,9 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    - ansible-playbook -i hosts playbook-install-packages.yml
+    - ansible-playbook -i hosts playbook-management-packages.yml
+    - ansible-playbook -i hosts playbook-hardening-security.yml
