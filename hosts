@@ -1,2 +1,2 @@
 [webservers]
-ec2-35-175-233-216.compute-1.amazonaws.com ansible_ssh_user=ubuntu ansible_ssh_private_key_file=./keys/keys
+ec2-34-230-47-168.compute-1.amazonaws.com ansible_ssh_user=ubuntu ansible_ssh_private_key_file=./keys/keys

@@ -1,28 +1,27 @@
 Configuração Inicial: (playbook-install-packages.yml) 
-Este playbook instala pacotes necessarios e adiciona a criação de usuários (user1 e user2) e grupos (group1 e group2), bem como a configuração básica de segurança para desativar o login direto como root e a autenticação por senha no SSH
+    Instala pacotes necessarios
+    Adiciona a criação de usuários (user1 e user2) e grupos (group1 e group2)
+    Desativa o login direto como root e a autenticação por senha no SSH
 
 
 Gerenciamento de Pacotes: (playbook-management-packages.yml)
-Este playbook instala o Node.js e npm, e depois atualiza os pacotes npm para a versão mais recente.
+    Instala o Node.js e npm
+    Atualiza os pacotes para a versão mais recente.
 
 
 Hardening de Segurança: (playbook-hardening-security.yml)
-Este playbook usa o módulo lineinfile para adicionar ou atualizar a configuração do PAM para as políticas de senha.
-
-
-Integração Contínua: (playbook-continuous-integration.yml)
-Este playbook define uma etapa deploy que executa o playbook, com isso é só incluir a mesma na pipeline.
+    Usa o módulo lineinfile para adicionar ou atualizar a configuração do PAM para as políticas de senha.
 
 
 Monitoramento e Logging: (playbook-monitoring-logging.yml)
-Este playbook instala o Prometheus e configura-o para monitorar o próprio host (localhost) na porta 9100.
+    Instala o Prometheus e configura-o para monitorar o próprio host (localhost) na porta 9100.
 
 
 Backup e Recuperação: (playbook-backup-recovery.yml)
-O playbook instala o rsync (caso ainda não esteja instalado) para realizar a sincronização dos arquivos.
-Cria um diretório /backup para armazenar os backups.
-Configura um script de backup em /usr/local/bin/backup_script.sh que usa o rsync para copiar os arquivos de origem para o diretório de backup.
-Adiciona um trabalho cron para executar o script de backup diariamente às 01:00.
+    Instala o rsync, para realizar a sincronização dos arquivos.
+    Cria um diretório /backup para armazenar os backups.
+    Configura um script de backup em /usr/local/bin/backup_script.sh que usa o rsync para copiar os arquivos de origem para o diretório de backup.
+    Adiciona um trabalho cron para executar o script de backup diariamente às 01:00.
 
 
 
@@ -38,6 +37,5 @@ terraform apply
 ansible-playbook -i hosts playbook-install-packages.yml
 ansible-playbook -i hosts playbook-management-packages.yml
 ansible-playbook -i hosts playbook-hardening-security.yml
-ansible-playbook -i hosts playbook-continuous-integration.yml
 ansible-playbook -i hosts playbook-monitoring-logging.yml
 ansible-playbook -i hosts playbook-backup-recovery.yml
